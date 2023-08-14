@@ -11,6 +11,9 @@ const ResumeForm = () => {
   const [profileImagePath, setProfileImagePath] = useState("");
   const [aboutImagePath, setAboutImagePath] = useState("");
   const [fullData, setFullData] = useState({});
+   const [loading, setLoading] = useState(false);
+   const [success, setSuccess] = useState(false);
+   const [error, setError] = useState(false);
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
@@ -61,7 +64,8 @@ const ResumeForm = () => {
 
 
 
-const handleSubmit3 = async () => {
+  const handleSubmit3 = async () => {
+  setLoading(true);
   try {
     const prodata = {
       name: `${name} !`,
@@ -92,10 +96,14 @@ const handleSubmit3 = async () => {
         },
       }
     );
+    setLoading(false);
+    setSuccess(true);
     console.log("Form submitted successfully");
     console.log(data);
 
   } catch (error) {
+    setLoading(false);
+    setError(true);
     console.error("An error occurred during form submission:", error);
   }
 };
@@ -454,7 +462,7 @@ console.log(fullData);
       >
         Add Interest
       </Button>
-      <Grid sx={{ p: "50px 0px 100px 0px" }}>
+      <Grid sx={{ p: "50px 0px 0px 0px" }}>
         <Button
           variant="contained"
           color="primary"
@@ -463,6 +471,13 @@ console.log(fullData);
         >
           Save Resume Data
         </Button>
+      </Grid>
+      <Grid sx={{ p: "50px 0px 100px 0px" }}>
+        {loading && <Button color="primary">Uploading form...</Button>}
+        {success && (
+          <Button color="success">Form submitted successfully</Button>
+        )}
+        {error && <Button color="error">Form submission failed</Button>}
       </Grid>
       {/* <img src={aboutImagePath} alt="not found"/>
     <img src={profileImagePath} alt="not found"/> */}
