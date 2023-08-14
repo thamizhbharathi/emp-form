@@ -1,5 +1,5 @@
 {
-  "proxy": "http://localhost:4000",
+  "proxy": "https://tb-family-qrcode-6f3beee0dd82.herokuapp.com/",
   "name": "input-form",
   "version": "0.1.0",
   "private": true,
